@@ -211,7 +211,7 @@ class ProductEditNutritionFactsFragment : ProductEditFragment() {
         loadNutritionImage()
 
         // Set no nutrition data checkbox
-        if (product!!.noNutritionData.equals("on", true)) {
+        if (product!!.noNutritionData.equals(ApiFields.Defaults.NO_NUTRITION_DATA_ON, true)) {
             binding.checkboxNoNutritionData.isChecked = true
             binding.nutritionFactsLayout.visibility = View.GONE
         }
@@ -575,9 +575,8 @@ class ProductEditNutritionFactsFragment : ProductEditFragment() {
             targetMap += getNutrientMapIfUpdated(view)
         }
 
-        if (targetMap.containsKey(ApiFields.Keys.NO_NUTRITION_DATA)) {
-            targetMap[ApiFields.Keys.NO_NUTRITION_DATA] = ApiFields.Defaults.NO_NUTRITION_DATA_OFF
-        }
+        // Ensure "no nutrition data" is always set to off
+        targetMap[ApiFields.Keys.NO_NUTRITION_DATA] = ApiFields.Defaults.NO_NUTRITION_DATA_OFF
 
         return targetMap
     }
